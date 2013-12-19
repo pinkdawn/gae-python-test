@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} My Cars {% endblock %}
+
+{% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">My Cars</h3>
+  </div>
+  <div class="panel-body">
+
+    <!-- Add new car form begin -->
+    <form role="form" class="form-inline" method="post" action="">
+      <div class="form-group">
+        <label class="sr-only" for="carName">Email address</label>
+        <input type="text" class="form-control" id="carName" placeholder="Enter name" name="name">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="carBuyDate">Buy Date</label>
+        <input type="date" class="form-control datepicker" id="carBuyDate" placeholder="Buy Date" name="buy_date">
+      </div>
+      <button type="submit" class="btn btn-default">Add</button>
+    </form>
+    <!-- Add new car form end -->
+
+    <p></p>
+
+    <div class="list-group">
+      {% for car in cars %}
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">
+          {{ car.name }}
+          <button type="button" class="btn btn-danger" data-delete-type="car" data-delete-id="{{ car.key.id() }}">
+            Delete
+          </button>
+        </h4>
+
+        <p class="list-group-item-text">...</p>
+
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
