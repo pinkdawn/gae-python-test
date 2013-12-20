@@ -2,6 +2,10 @@ define(['jquery'], function($) {
 
   function _setupDelete(){
     $(document).on('click', '[data-delete-type]', [], function(){
+      if(!confirm('Are you sure to delete this')){
+        return false;
+      }
+
       var _type = $(this).attr('data-delete-type');
       var _id = $(this).attr('data-delete-id');
 
@@ -10,7 +14,7 @@ define(['jquery'], function($) {
         url: '/' + _type + '?id=' + _id,
         type: 'DELETE',
         complete: function(data){
-          location.href = location.href;
+          location.reload();
         }
       });
     });

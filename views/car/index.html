@@ -13,33 +13,29 @@
     <form role="form" class="form-inline" method="post" action="">
       <div class="form-group">
         <label class="sr-only" for="carName">Email address</label>
-        <input type="text" class="form-control" id="carName" placeholder="Enter name" name="name">
+        <input type="text" class="form-control" id="carName" placeholder="Enter name" name="name" required="">
       </div>
       <div class="form-group">
         <label class="sr-only" for="carBuyDate">Buy Date</label>
         <input type="date" class="form-control datepicker" id="carBuyDate" placeholder="Buy Date" name="buy_date">
       </div>
-      <button type="submit" class="btn btn-default">Add</button>
+      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
     </form>
     <!-- Add new car form end -->
 
     <p></p>
 
-    <div class="list-group">
-      {% for car in cars %}
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">
+    {% for car in cars %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
           {{ car.name }}
-          <button type="button" class="btn btn-danger" data-delete-type="car" data-delete-id="{{ car.key.id() }}">
-            Delete
-          </button>
-        </h4>
-
-        <p class="list-group-item-text">...</p>
-
-      </a>
-      {% endfor %}
-    </div>
+          <span class="glyphicon glyphicon-remove right delete" data-delete-type="car" data-delete-id="{{ car.key.id() }}"></span>
+        </div>
+        <div class="panel-body">
+          {{ car.buy_time }}
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

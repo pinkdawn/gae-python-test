@@ -5,7 +5,7 @@ from google.appengine.ext import ndb
 
 class CarController(BaseController):
     def Get(self):
-        cars = Car.all()
+        cars = Car.all(key=self.rootKey()).fetch()
         context = {
             'user': self.user,
             'cars': cars
@@ -14,7 +14,7 @@ class CarController(BaseController):
 
     def Post(self):
         new_car = Car(
-            parent=ndb.Key("Car", "%s %s" % (self.user.email(), self.request.get('name'))),
+            parent = self.rootKey(),
             owner = self.user,
             name = self.request.get('name'),
             buy_time = datetime.strptime(self.request.get('buy_date'), "%Y-%m-%d")
@@ -23,6 +23,4 @@ class CarController(BaseController):
         self.redirect('/car')
 
     def Delete(self):
-        _car = Car.get_by_id(int(self.request.get('id')))
-        if _car:
-            _car.key.delete()
+        ndb.Key(Car, int(self.request.get('id')), parent=self.rootKey()).delete()

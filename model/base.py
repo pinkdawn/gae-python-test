@@ -1,6 +1,7 @@
 from google.appengine.ext import ndb
 
 class BaseModel(ndb.Model):
+    id = ndb.KeyProperty
 
     @classmethod
     def all(cls, key = None, order = None):

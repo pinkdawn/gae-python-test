@@ -1,4 +1,20 @@
 body {
-    padding-bottom: 30px;
-    padding-top: 70px;
+  padding-bottom: 30px;
+  padding-top: 70px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
