@@ -11,10 +11,14 @@ body {
   float: right;
 }
 
-.delete {
+.delete, .toggle {
   cursor: pointer;
 }
 
 .hide {
   display: none;
+}
+
+input.short {
+  width: 100px;
 }

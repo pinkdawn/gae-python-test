@@ -29,10 +29,18 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           {{ car.name }}
-          <span class="glyphicon glyphicon-remove right delete" data-delete-type="car" data-delete-id="{{ car.key.id() }}"></span>
+          <span class="glyphicon glyphicon-remove right delete" title="Delete"
+                data-delete-type="car" data-delete-id="{{ car.key.id() }}"></span>
+          <span class="right"> &nbsp; &nbsp; </span>
+          <span class="glyphicon glyphicon-edit right toggle" data-toggle="edit-car-{{ car.key.id() }}"
+                title="Edit"></span>
         </div>
         <div class="panel-body">
-          {{ car.buy_time }}
+          <div id="edit-car-{{ car.key.id() }}" class="hidden">
+            {% include "car/edit.html" %}
+          </div>
+
+          {% include "expense/form.html" %}
         </div>
       </div>
     {% endfor %}

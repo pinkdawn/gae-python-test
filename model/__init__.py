@@ -1,2 +1,2 @@
-from car import Car
+from car import Car, Expense
 from base import BaseModel

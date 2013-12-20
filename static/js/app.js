@@ -7,8 +7,16 @@ define(['jquery', 'bootstrap', 'lib/bootstrap/datepicker', 'ajax'], function($, 
     });
   }
 
+  function _setupToggle(){
+    $(document).on('click', '[data-toggle]', [], function(){
+      var _target = $(this).attr('data-toggle');
+      $('#' + _target).toggle().removeClass('hidden');
+    });
+  }
+
   function _init(){
     _setupDatePicker();
+    _setupToggle();
     ajax.initialize();
   }
 

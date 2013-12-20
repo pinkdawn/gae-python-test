@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-6">
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <label class="sr-only" for="oilAmount">Refuel Amount</label>
+        <input type="number" class="form-control short" id="oilAmount" placeholder="Amount" required="">
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="oilDate">Date</label>
+        <input type="date" class="form-control short datepicker" id="oilDate" placeholder="Date"
+               required="" value="{{ now|date }}">
+      </div>
+      <button type="submit" class="btn btn-default" title="Refuel">
+        <span class="glyphicon glyphicon-tint"></span>
+      </button>
+      <button type="submit" class="btn btn-default" title="Parking">
+        <img src="/img/icon/park.png" width="20" height="20">
+      </button>
+      <button type="submit" class="btn btn-default" title="Car Wash">
+        <img src="/img/icon/wash.png" width="20" height="20">
+      </button>
+    </form>
+  </div>
+</div>

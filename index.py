@@ -3,7 +3,8 @@ from controller import BaseController, CarController
 
 
 application = webapp2.WSGIApplication([
-                                          ('/', CarController),
+                                          (r'/', CarController),
                                           (r'/car', CarController),
+                                          (r'/car/(\d+)', CarController),
                                       ], debug=True)
 
