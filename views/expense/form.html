@@ -1,24 +1,44 @@
-<div class="row">
-  <div class="col-md-6">
-    <form class="form-inline" role="form">
-      <div class="form-group">
-        <label class="sr-only" for="oilAmount">Refuel Amount</label>
-        <input type="number" class="form-control short" id="oilAmount" placeholder="Amount" required="">
-      </div>
-      <div class="form-group">
-        <label class="sr-only" for="oilDate">Date</label>
-        <input type="date" class="form-control short datepicker" id="oilDate" placeholder="Date"
-               required="" value="{{ now|date }}">
-      </div>
-      <button type="submit" class="btn btn-default" title="Refuel">
-        <span class="glyphicon glyphicon-tint"></span>
-      </button>
-      <button type="submit" class="btn btn-default" title="Parking">
-        <img src="/img/icon/park.png" width="20" height="20">
-      </button>
-      <button type="submit" class="btn btn-default" title="Car Wash">
-        <img src="/img/icon/wash.png" width="20" height="20">
-      </button>
-    </form>
+{% from 'macro/icon.html' import icon %}
+
+<form class="form-inline" role="form" action="/car/{{ car.key.id() }}/expense" method="post">
+  <div class="form-group">
+    <label class="sr-only" for="amount">Refuel Amount</label>
+    <input type="number" class="form-control short" id="amount" placeholder="Amount"
+           required="" name="amount">
   </div>
-</div>
+  <div class="form-group">
+    <label class="sr-only" for="expense_date">Date</label>
+    <input type="date" class="form-control short datepicker" id="expense_date" placeholder="Date"
+           required="" value="{{ now|date }}" name="date">
+  </div>
+  <button type="submit" class="btn btn-default" title="Refuel" data-expense-type="refuel">
+    <span class="glyphicon glyphicon-tint"></span>
+  </button>
+  <button type="submit" class="btn btn-default" title="Parking" data-expense-type="parking">
+    {{ icon("park", "Parking") }}
+  </button>
+  <button type="submit" class="btn btn-default" title="Washing" data-expense-type="washing">
+    {{ icon("wash", "Washing") }}
+  </button>
+  <button type="submit" class="btn btn-default" title="Ticket" data-expense-type="ticket">
+    {{ icon("ticket", "Ticket") }}
+  </button>
+  <button type="submit" class="btn btn-default" title="Insurance" data-expense-type="insurance">
+    {{ icon("insurance", "Insurance") }}
+  </button>
+  <div class="form-group">
+    <label class="sr-only" for="expense_type">Type</label>
+    <input type="date" class="form-control short" id="expense_type" placeholder="Exp. Type"
+           name="type" required="">
+  </div>
+  <button type="submit" class="btn btn-default" title="Others" data-expense-type="other">
+    ...
+  </button>
+</form>
+
+
+<script type="text/javascript">
+    require(['expense-form'], function(expense_form) {
+      expense_form.initialize();
+    });
+</script>

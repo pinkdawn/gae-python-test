@@ -5,12 +5,16 @@
 {% block content %}
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">My Cars</h3>
+    <h3 class="panel-title">
+      My Cars
+      <span class="glyphicon glyphicon-plus right toggle" data-toggle="new-car-form"></span>
+    </h3>
+
   </div>
   <div class="panel-body">
 
     <!-- Add new car form begin -->
-    <form role="form" class="form-inline" method="post" action="">
+    <form role="form" class="form-inline hidden" method="post" action="" id="new-car-form">
       <div class="form-group">
         <label class="sr-only" for="carName">Email address</label>
         <input type="text" class="form-control" id="carName" placeholder="Enter name" name="name" required="">
@@ -26,11 +30,12 @@
     <p></p>
 
     {% for car in cars %}
-      <div class="panel panel-default">
+      <div class="panel panel-default" id="car-{{ car.key.id() }}">
         <div class="panel-heading">
           {{ car.name }}
-          <span class="glyphicon glyphicon-remove right delete" title="Delete"
-                data-delete-type="car" data-delete-id="{{ car.key.id() }}"></span>
+          <span data-delete-url="/car/{{ car.key.id() }}"
+                data-remove-selector="#car-{{ car.key.id() }}"
+                class="glyphicon glyphicon-remove right delete" title="Delete"></span>
           <span class="right"> &nbsp; &nbsp; </span>
           <span class="glyphicon glyphicon-edit right toggle" data-toggle="edit-car-{{ car.key.id() }}"
                 title="Edit"></span>
@@ -40,7 +45,19 @@
             {% include "car/edit.html" %}
           </div>
 
-          {% include "expense/form.html" %}
+          <div class="row">
+            <div class="col-md-8">
+              {% include "expense/form.html" %}
+            </div>
+
+            <div class="right">
+              {% include "expense/sum.html" %}
+            </div>
+
+            <div class="col-md-8 left">
+              {% include "expense/list.html" %}
+            </div>
+          </div>
         </div>
       </div>
     {% endfor %}

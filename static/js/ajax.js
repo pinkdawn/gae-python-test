@@ -1,20 +1,21 @@
 define(['jquery'], function($) {
 
   function _setupDelete(){
-    $(document).on('click', '[data-delete-type]', [], function(){
+    $(document).on('click', '[data-delete-url]', [], function(){
       if(!confirm('Are you sure to delete this')){
         return false;
       }
 
-      var _type = $(this).attr('data-delete-type');
-      var _id = $(this).attr('data-delete-id');
+      var _url = $(this).attr('data-delete-url');
+      var _target = $(this).attr('data-remove-selector');
 
       $.ajax({
         dataType: 'json',
-        url: '/' + _type + '?id=' + _id,
+        url: _url,
         type: 'DELETE',
         complete: function(data){
-          location.reload();
+          // location.reload();
+          $(_target).remove();
         }
       });
     });

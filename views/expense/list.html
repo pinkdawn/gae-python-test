@@ -1,0 +1,30 @@
+{% from 'macro/icon.html' import icon %}
+
+<div class="list-group">
+  {% for exp in car.expenses() %}
+    <a href="javascript:;" class="list-group-item" id="expense-{{ exp.key.id() }}">
+      {% if exp.type == 'ticket' %}
+        {{ icon("ticket", "Ticket") }}
+      {% elif exp.type == 'parking' %}
+        {{ icon("park", "Parking") }}
+      {% elif exp.type == 'washing' %}
+        {{ icon("wash", "Washing") }}
+      {% elif exp.type == 'refuel' %}
+        <span class="glyphicon glyphicon-tint"></span>
+      {% elif exp.type == 'insurance' %}
+        {{ icon('insurance', 'Insurance') }}
+      {% else %}
+        {{ exp.type }}
+      {% endif %}
+
+      {{ exp.amount }}
+
+      <span data-delete-url="/car/{{ car.key.id() }}/expense/{{ exp.key.id() }}"
+            data-remove-selector="#expense-{{ exp.key.id() }}"
+            title="Delete" class="glyphicon glyphicon-remove right delete"></span>
+      <span class="right">
+        {{ exp.date|date }} &nbsp;
+      </span>
+    </a>
+  {% endfor %}
+</div>

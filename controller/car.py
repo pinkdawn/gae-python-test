@@ -1,11 +1,30 @@
 from base import BaseController
-from model import Car
+from model import Car, Expense
 from datetime import datetime
 from google.appengine.ext import ndb
 
+import json
+
+class ExportController(BaseController):
+    def Get(self):
+        _result = []
+        cars = Car.all(Car.owner==self.user, key=self.rootKey()).fetch()
+        for car in cars:
+            _car = car.json()
+            _car['expenses'] = []
+            for _exp in Expense.all(key=ndb.Key(Car, car.key.id())).fetch():
+                _car['expenses'].append(_exp.json())
+            _result.append(_car)
+        self.response
+        self.response.write(json.dumps(_result))
+
+class ImportController(BaseController):
+    def Post(self):
+        pass
+
 class CarController(BaseController):
     def Get(self):
-        cars = Car.all(key=self.rootKey()).fetch()
+        cars = Car.all(Car.owner==self.user, key=self.rootKey()).fetch()
         context = {
             'user': self.user,
             'cars': cars,
@@ -24,10 +43,14 @@ class CarController(BaseController):
 
         _car.name = self.request.get('name')
         if self.request.get('buy_date'):
-            _car.buy_time = datetime.strptime(self.request.get('buy_date'), "%Y-%m-%d")
+            _car.date = datetime.strptime(self.request.get('buy_date'), "%Y-%m-%d")
+        if self.request.get('mile'):
+            _car.mile = int(self.request.get('mile'))
+        if self.request.get('price'):
+            _car.price = float(self.request.get('price'))
 
         self.response.write(_car.put())
         self.redirect('/car')
 
-    def Delete(self):
-        ndb.Key(Car, int(self.request.get('id')), parent=self.rootKey()).delete()
+    def Delete(self, _id):
+        ndb.Key(Car, int(_id), parent=self.rootKey()).delete()
