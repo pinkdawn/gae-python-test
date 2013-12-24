@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  require(['jquery', 'lang', 'lib/fullcalendar.min'], function($, _){
+    var _events = [];
+
+    {% for _exp in car.expenses_last_year() %}
+      _events.push({
+        id: {{ _exp.key.id() }},
+        title: _('{{ _exp.type }}') + ' {{ _exp.amount|int }}',
+        color: {% if _exp.type == 'refuel' %}
+          'black'
+        {% elif _exp.type == 'parking' %}
+          'blue'
+        {% elif _exp.type == 'ticket' %}
+          'red'
+        {% elif _exp.type == 'washing' %}
+          'orange'
+        {% else %}
+          ''
+        {% endif %},
+        start: '{{ _exp.date }}'
+      });
+    {% endfor %}
+
+    $('#car-calendar-{{ car.key.id() }}').data('full-calendar-events', _events);
+
+  });
+</script>

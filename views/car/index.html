@@ -7,7 +7,9 @@
   <div class="panel-heading">
     <h3 class="panel-title">
       My Cars
-      <span class="glyphicon glyphicon-plus right toggle" data-toggle="new-car-form"></span>
+      <span class="glyphicon glyphicon-plus right toggle" data-toggle="new-car-form">&nbsp;</span>
+      <span class="glyphicon glyphicon-export right" title="Export">&nbsp;</span>
+      <span class="glyphicon glyphicon-import right" title="Import">&nbsp;</span>
     </h3>
 
   </div>
@@ -54,9 +56,16 @@
               {% include "expense/sum.html" %}
             </div>
 
-            <div class="col-md-8 left">
-              {% include "expense/list.html" %}
+
+            <div class="col-md-8 ">
+              <p></p>
+              <div class="calendar" id="car-calendar-{{ car.key.id() }}"></div>
+              {% include "expense/js/calendar-js.html" %}
             </div>
+
+            <!--<div class="col-md-8 left">-->
+              <!--{% include "expense/list.html" %}-->
+            <!--</div>-->
           </div>
         </div>
       </div>

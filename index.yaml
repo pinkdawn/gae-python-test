@@ -13,4 +13,17 @@ indexes:
 - kind: Expense
   ancestor: yes
   properties:
+  - name: date
+    direction: desc
+
+- kind: Expense
+  ancestor: yes
+  properties:
   - name: type
+
+- kind: Expense
+  ancestor: yes
+  properties:
+  - name: type
+  - name: date
+    direction: desc

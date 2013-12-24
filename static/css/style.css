@@ -11,12 +11,8 @@ body {
   float: right;
 }
 
-.delete, .toggle {
+.delete, .toggle, .glyphicon, .fc-day {
   cursor: pointer;
-}
-
-.hide {
-  display: none;
 }
 
 input.short {

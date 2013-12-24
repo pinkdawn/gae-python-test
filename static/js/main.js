@@ -6,6 +6,9 @@ require.config({
     shim:{
       'lib/bootstrap/datepicker': {
         deps: ['jquery']
+      },
+      'lib/fullcalendar.min': {
+        deps: ['jquery']
       }
     }
 });

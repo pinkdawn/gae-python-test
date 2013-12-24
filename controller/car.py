@@ -15,6 +15,8 @@ class ExportController(BaseController):
             for _exp in Expense.all(key=ndb.Key(Car, car.key.id())).fetch():
                 _car['expenses'].append(_exp.json())
             _result.append(_car)
+
+        self.response.headers['Content-Type'] = "text/plain"
         self.response
         self.response.write(json.dumps(_result))
 
@@ -28,7 +30,7 @@ class CarController(BaseController):
         context = {
             'user': self.user,
             'cars': cars,
-            'now' : datetime.now()
+            'now' : datetime.date(datetime.now())
         }
         self.render('car/index', context)
 
@@ -46,8 +48,12 @@ class CarController(BaseController):
             _car.date = datetime.strptime(self.request.get('buy_date'), "%Y-%m-%d")
         if self.request.get('mile'):
             _car.mile = int(self.request.get('mile'))
+        else:
+            _car.mile = 1
         if self.request.get('price'):
             _car.price = float(self.request.get('price'))
+        else:
+            _car.price = 0
 
         self.response.write(_car.put())
         self.redirect('/car')
