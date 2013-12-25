@@ -12,48 +12,48 @@
     </tr>
   </thead>
   <tr>
-    <td><span class="glyphicon glyphicon-tint"></span></td>
+    <td title="加油"><span class="glyphicon glyphicon-tint"></span></td>
     {% set sum_refuel = car.sum('refuel') %}
     <td>{{ sum_refuel|int }}</td>
     <td>{{ (sum_refuel / car.mile)|round(2)}}</td>
     <td>{{ (sum_refuel / _days)|round(2) }}</td>
   </tr>
   <tr>
-    <td>{{ icon("park", "Parking") }}</td>
+    <td>{{ icon("park", "停车") }}</td>
     {% set sum_park = car.sum('parking') %}
     <td>{{ sum_park|int }}</td>
     <td>{{ (sum_park / car.mile)|round(2) }}</td>
     <td>{{ (sum_park / _days)|round(2) }}</td>
   </tr>
   <tr>
-    <td>{{ icon("insurance", "Insurance") }}</td>
+    <td>{{ icon("insurance", "保险") }}</td>
     {% set sum_ins = car.sum('insurance') %}
     <td>{{ sum_ins|int }}</td>
     <td>{{ (sum_ins / car.mile)|round(2) }}</td>
     <td>{{ (sum_ins / _days)|round(2) }}</td>
   </tr>
   <tr>
-    <td>{{ icon("wash", "Washing") }}</td>
+    <td>{{ icon("wash", "洗车") }}</td>
     {% set sum_wash = car.sum('washing') %}
     <td>{{ sum_wash|int }}</td>
     <td>{{ (sum_wash / car.mile)|round(2)}}</td>
     <td>{{ (sum_wash / _days)|round(2) }}</td>
   </tr>
   <tr>
-    <td>{{ icon("ticket", "Ticket") }}</td>
+    <td>{{ icon("ticket", "罚单") }}</td>
     {% set sum_ticket = car.sum('ticket') %}
     <td>{{ sum_ticket|int }}</td>
     <td>{{ (sum_ticket / car.mile) |round(2) }}</td>
     <td>{{ (sum_ticket / _days)|round(2) }}</td>
   </tr>
   <tr>
-    <td>{{ icon("car", "Price include tax") }}</td>
+    <td>{{ icon("car", "购车款（含税）") }}</td>
     <td>{{ car.price|int }}</td>
     <td>{{ (car.price / car.mile) |round(2) }}</td>
     <td>{{ (car.price / _days)|round(2) }}</td>
   </tr>
   <tr>
-    <td title="Other expenses">...</td>
+    <td title="其他支出">...</td>
     {% set sum_others = car.sum('other') %}
     <td>{{ sum_others|int }}</td>
     <td>{{ (sum_others / car.mile) |round(2) }}</td>

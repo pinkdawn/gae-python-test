@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  require(['jquery', 'lang', 'lib/fullcalendar.min'], function($, _){
+  require(['jquery', 'lang', 'calendar'], function($, _, Cal){
     var _events = [];
 
     {% for _exp in car.expenses_last_year() %}
@@ -17,11 +17,13 @@
         {% else %}
           ''
         {% endif %},
-        start: '{{ _exp.date }}'
+        start: '{{ _exp.date }}',
+        car: '{{ car.key.id() }}'
       });
     {% endfor %}
 
     $('#car-calendar-{{ car.key.id() }}').data('full-calendar-events', _events);
 
+    Cal.initialize();
   });
 </script>

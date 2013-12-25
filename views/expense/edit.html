@@ -1,0 +1,33 @@
+<form role="form" id="expenseEditForm" method="post" action="/car/{{ _carID }}/expense/{{ _expense.key.id() }}">
+  <div class="form-group">
+    <label for="expenseAmountEdit">金额</label>
+    <input type="text" class="form-control" id="expenseAmountEdit" placeholder="输入金额"
+      value="{{ _expense.amount }}" name="amount">
+  </div>
+  <div class="form-group">
+    <label for="expenseDateEdit">日期</label>
+    <input type="text" class="form-control" id="expenseDateEdit" placeholder="输入日期"
+      value="{{ _expense.date|date }}" name="date">
+  </div>
+  <div class="form-group">
+    <label for="expenseAddressEdit">地址</label>
+    <input type="text" class="form-control" id="expenseAddressEdit" placeholder="输入地址"
+           value="{{ _expense.address }}" name="address">
+    <input id="expenseLngEdit" name="lng" type="hidden" name="location" value="{{ _expense.location.lon }}" />
+    <input id="expenseLatEdit" name="lat" type="hidden" name="location" value="{{ _expense.location.lat }}" />
+  </div>
+  <div class="form-group">
+    <div id="baidu-map"></div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">类型</label>
+    <select name="type">
+      {% for type in _types %}
+        <option value="{{ type }}" {% if type == _expense.type %}selected="" {% endif %}>{{ _types[type] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-success">保存</button>
+  <button type="button" class="btn btn-danger">删除</button>
+</form>

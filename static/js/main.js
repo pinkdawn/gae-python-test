@@ -9,6 +9,9 @@ require.config({
       },
       'lib/fullcalendar.min': {
         deps: ['jquery']
+      },
+      'bootstrap':{
+        deps: ['jquery']
       }
     }
 });

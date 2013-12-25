@@ -11,10 +11,16 @@ body {
   float: right;
 }
 
-.delete, .toggle, .glyphicon, .fc-day {
+.delete, .toggle, .glyphicon, .fc-day, .fc-event-inner {
   cursor: pointer;
 }
 
 input.short {
   width: 100px;
+}
+
+#baidu-map{
+    border:0px solid gray;
+    width: 500px;
+    height: 350px;
 }

@@ -3,12 +3,12 @@
 <form class="form-inline" role="form" action="/car/{{ car.key.id() }}/expense" method="post">
   <div class="form-group">
     <label class="sr-only" for="amount">Amount</label>
-    <input type="number" class="form-control short" id="amount" placeholder="Amount"
+    <input type="text" class="form-control short" id="amount" placeholder="Amount"
            required="" name="amount" value="200">
   </div>
   <div class="form-group">
     <label class="sr-only" for="expense_date">Date</label>
-    <input type="date" class="form-control short datepicker" id="expense_date" placeholder="Date"
+    <input type="text" class="form-control short datepicker" id="expense_date" placeholder="Date"
            required="" value="{{ now|date }}" name="date">
   </div>
   <button type="submit" class="btn btn-default" title="Refuel" data-expense-type="refuel">

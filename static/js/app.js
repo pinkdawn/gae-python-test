@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap', 'lib/bootstrap/datepicker', 'ajax', 'calendar'], function($, bootstrap, datepicker, ajax, Cal) {
+define(['jquery', 'bootstrap', 'lib/bootstrap/datepicker', 'ajax'], function($, bootstrap, datepicker, ajax) {
 
   function _setupDatePicker(){
     $('.datepicker').datepicker({
@@ -18,7 +18,6 @@ define(['jquery', 'bootstrap', 'lib/bootstrap/datepicker', 'ajax', 'calendar'], 
     _setupDatePicker();
     _setupToggle();
     ajax.initialize();
-    Cal.initialize();
   }
 
   return {

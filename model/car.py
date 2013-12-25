@@ -56,5 +56,7 @@ class Expense(BaseModel):
     amount = ndb.FloatProperty()
     type  = ndb.StringProperty()
     date = ndb.DateProperty()
+    address = ndb.StringProperty()
+    location = ndb.GeoPtProperty()
 
     _fields = ('amount', 'type', 'date')

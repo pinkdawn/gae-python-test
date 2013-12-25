@@ -17,7 +17,6 @@ class ExportController(BaseController):
             _result.append(_car)
 
         self.response.headers['Content-Type'] = "text/plain"
-        self.response
         self.response.write(json.dumps(_result))
 
 class ImportController(BaseController):
