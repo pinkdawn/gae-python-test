@@ -2,7 +2,7 @@ import webapp2
 from google.appengine.api import users
 from google.appengine.ext import ndb
 from model import BaseModel
-from classes.jinja2 import jinja2
+from classes.jinja2 import jj2
 
 class BaseController(webapp2.RequestHandler):
     def before(self):
@@ -22,7 +22,7 @@ class BaseController(webapp2.RequestHandler):
 
     def render(self, view, context):
         #TODO add cache to template file
-        template = jinja2.get_template('%s.html' % view)
+        template = jj2.get_template('%s.html' % view)
         self.response.write(template.render(context))
 
     def get(self, *args, **kwargs):

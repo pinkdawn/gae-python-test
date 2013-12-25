@@ -11,7 +11,8 @@ define(['jquery', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function
         title: "Edit Expense"
       });
 
-      _setupMap();
+      // make sure dom is visible before init map, or 2nd time map will ne abnormal
+      setTimeout(function(){_setupMap();}, 200);
       _setupEditForm();
     });
   }
@@ -23,15 +24,11 @@ define(['jquery', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function
     var lng = $("#expenseLngEdit").val(), lat = $("#expenseLatEdit").val();
     if (lng && lat){
       var _initPoint = new BMap.Point(lng,lat);
-      map.centerAndZoom(_initPoint,17);
 
-      marker = new BMap.Marker(_initPoint);  // 创建标注
+      marker = new BMap.Marker(_initPoint);
       map.addOverlay(marker);
 
-      setTimeout(function(){
-        map.setCenter(_initPoint);
-      }, 200);
-
+      setTimeout(function(){map.centerAndZoom(_initPoint,17);}, 200);
     } else {
       map.centerAndZoom("厦门",15);
     }
@@ -42,12 +39,16 @@ define(['jquery', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function
       $("#expenseLngEdit").val(e.point.lng);
       $("#expenseLatEdit").val(e.point.lat);
 
-      if (marker != undefined){
-        map.removeOverlay(marker);
-      }
-      var newmarker = new BMap.Marker(e.point);  // 创建标注
-      map.addOverlay(newmarker);
-      marker = newmarker;
+      map.removeOverlay(marker);
+      marker = new BMap.Marker(e.point);
+      map.addOverlay(marker);
+    });
+
+    var local = new BMap.LocalSearch(map, {
+      renderOptions:{map: map}
+    });
+    $('span.map-search').click(function(){
+      local.search($('#expenseAddressEdit').val());
     });
   }
 

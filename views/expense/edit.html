@@ -10,7 +10,7 @@
       value="{{ _expense.date|date }}" name="date">
   </div>
   <div class="form-group">
-    <label for="expenseAddressEdit">地址</label>
+    <label for="expenseAddressEdit">地址 </label><span class="glyphicon glyphicon-map-marker map-search"></span>
     <input type="text" class="form-control" id="expenseAddressEdit" placeholder="输入地址"
            value="{{ _expense.address }}" name="address">
     <input id="expenseLngEdit" name="lng" type="hidden" name="location" value="{{ _expense.location.lon }}" />
