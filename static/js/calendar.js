@@ -29,7 +29,7 @@ define(['jquery', 'lib/opentip-jquery.min', 'lib/bootstrap/bootbox.min', 'lib/fu
     var _tip = new Opentip($(this));
     _tip.show();
     _tip.setContent(_address);
-    
+
     $(this).data('tip', _tip);
   }
 
@@ -107,7 +107,9 @@ define(['jquery', 'lib/opentip-jquery.min', 'lib/bootstrap/bootbox.min', 'lib/fu
           events: $(this).data('full-calendar-events'),
           eventClick: editExpense,
           eventMouseover: hoverExpense,
-          eventMouseout: hoverOutExpense
+          eventMouseout: hoverOutExpense,
+          dayNamesShort: ['日','一','二','三','四','五','六'],
+          titleFormat:{month:'yyyy-MM'}
         });
       });
     });

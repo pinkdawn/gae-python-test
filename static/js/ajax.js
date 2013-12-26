@@ -8,14 +8,18 @@ define(['jquery'], function($) {
 
       var _url = $(this).attr('data-delete-url');
       var _target = $(this).attr('data-remove-selector');
+      var _refresh = $(this).attr('data-remove-refresh');
 
       $.ajax({
         dataType: 'json',
         url: _url,
         type: 'DELETE',
         complete: function(data){
-          // location.reload();
-          $(_target).remove();
+          if (_refresh){
+            location.reload();
+          } else {
+            $(_target).remove();
+          }
         }
       });
     });
