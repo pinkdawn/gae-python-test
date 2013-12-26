@@ -18,7 +18,8 @@
           ''
         {% endif %},
         start: '{{ _exp.date }}',
-        car: '{{ car.key.id() }}'
+        car: '{{ car.key.id() }}',
+        address: '{{ _exp.address }}'
       });
     {% endfor %}
 

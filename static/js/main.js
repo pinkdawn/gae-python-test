@@ -12,6 +12,9 @@ require.config({
       },
       'bootstrap':{
         deps: ['jquery']
+      },
+      'lib/opentip-jquery.min':{
+        deps: ['jquery']
       }
     }
 });

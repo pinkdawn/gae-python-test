@@ -21,6 +21,7 @@ input.short {
 
 #baidu-map{
     border:0px solid gray;
-    width: 500px;
-    height: 350px;
+    margin: 0 20px;
+    width: 90%;
+    height: 400px;
 }

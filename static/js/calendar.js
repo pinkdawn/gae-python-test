@@ -1,4 +1,4 @@
-define(['jquery', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function ($) {
+define(['jquery', 'lib/opentip-jquery.min', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function ($) {
 
   function editExpense(cal, jsEvent, title){
     var _expenseID = cal.id;
@@ -8,13 +8,36 @@ define(['jquery', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function
     $.get(_url, function(html){
       bootbox.dialog({
         message: html,
-        title: "Edit Expense"
+        title: "修改支出"
       });
 
       // make sure dom is visible before init map, or 2nd time map will ne abnormal
       setTimeout(function(){_setupMap();}, 200);
       _setupEditForm();
     });
+  }
+
+
+  function hoverExpense(event, jsEvent, view){
+    var _tip = $(this).data('tip');
+    if (_tip){
+      _tip.show();
+      return;
+    }
+
+    var _address = event.address;
+    var _tip = new Opentip($(this));
+    _tip.show();
+    _tip.setContent(_address);
+    
+    $(this).data('tip', _tip);
+  }
+
+  function hoverOutExpense(event, jsEvent, view){
+    var _tip = $(this).data('tip');
+    if (_tip){
+      _tip.hide();
+    }
   }
 
   function _setupMap(){
@@ -82,23 +105,30 @@ define(['jquery', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function
           firstDay: 1,
           weekMode: 'liquid',
           events: $(this).data('full-calendar-events'),
-          eventClick: editExpense
+          eventClick: editExpense,
+          eventMouseover: hoverExpense,
+          eventMouseout: hoverOutExpense
         });
       });
     });
   }
 
-  function _setupDayClickEvt() {
+  function _setupEvent() {
     $(document).on('click', 'td.fc-day', [], function () {
       $('td.fc-day').removeClass('fc-state-highlight');
       $(this).addClass('fc-state-highlight');
       $('#expense_date').val($(this).attr('data-date'));
     });
+    $(document).keyup(function(e) {
+      if (e.keyCode == 27) {
+        bootbox.hideAll();
+      }
+    });
   }
 
   function _init() {
     _setupCalendar();
-    _setupDayClickEvt();
+    _setupEvent();
   }
 
   return {
