@@ -1,6 +1,7 @@
 from google.appengine.ext import ndb
 import datetime
 
+
 class BaseModel(ndb.Model):
     id = ndb.KeyProperty
 
@@ -10,13 +11,15 @@ class BaseModel(ndb.Model):
         _result = {}
         for _f in self._fields:
             _result[_f] = getattr(self, _f)
-            if isinstance(_result[_f], datetime.datetime) \
-                or isinstance(_result[_f], datetime.date):
+            if type(_result[_f]) in (datetime.datetime,
+                                     datetime.date,
+                                     ndb.GeoPt
+            ):
                 _result[_f] = str(_result[_f])
         return _result
 
     @classmethod
-    def all(cls, query = None, key = None, order = None):
+    def all(cls, query=None, key=None, order=None):
         if query:
             _query = cls.query(query, ancestor=key)
         else:

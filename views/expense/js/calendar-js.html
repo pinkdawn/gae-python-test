@@ -2,21 +2,18 @@
   require(['jquery', 'lang', 'calendar'], function($, _, Cal){
     var _events = [];
 
+    {% set typeColors ={
+      'refuel': 'black',
+      'parking':'blue',
+      'ticket':'red',
+      'washing':'orange',
+    } %}
+
     {% for _exp in car.expenses_last_year() %}
       _events.push({
         id: {{ _exp.key.id() }},
         title: _('{{ _exp.type }}') + ' {{ _exp.amount|int }}',
-        color: {% if _exp.type == 'refuel' %}
-          'black'
-        {% elif _exp.type == 'parking' %}
-          'blue'
-        {% elif _exp.type == 'ticket' %}
-          'red'
-        {% elif _exp.type == 'washing' %}
-          'orange'
-        {% else %}
-          ''
-        {% endif %},
+        color: '{{ typeColors.get(_exp.type,'') }}',
         start: '{{ _exp.date }}',
         car: '{{ car.key.id() }}',
         address: '{{ _exp.address }}'

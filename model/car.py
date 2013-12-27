@@ -59,4 +59,4 @@ class Expense(BaseModel):
     address = ndb.StringProperty()
     location = ndb.GeoPtProperty()
 
-    _fields = ('amount', 'type', 'date')
+    _fields = ('amount', 'type', 'date', 'address', 'location')

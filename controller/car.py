@@ -16,7 +16,8 @@ class ExportController(BaseController):
                 _car['expenses'].append(_exp.json())
             _result.append(_car)
 
-        self.response.headers['Content-Type'] = "text/plain"
+        self.response.headers['Content-Type'] = "application/force-download; charset=utf-8"
+        self.response.headers['Content-Disposition'] = 'attachment; filename="car-expenses-%s.json"' % str(datetime.now())[:10]
         self.response.write(json.dumps(_result))
 
 class ImportController(BaseController):

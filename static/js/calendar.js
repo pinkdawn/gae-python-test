@@ -1,4 +1,4 @@
-define(['jquery', 'lib/opentip-jquery.min', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function ($) {
+define(['jquery', 'lang', 'lib/opentip-jquery.min', 'lib/bootstrap/bootbox.min', 'lib/fullcalendar.min'], function ($, _) {
 
   function editExpense(cal, jsEvent, title){
     var _expenseID = cal.id;
@@ -13,26 +13,30 @@ define(['jquery', 'lib/opentip-jquery.min', 'lib/bootstrap/bootbox.min', 'lib/fu
 
       // make sure dom is visible before init map, or 2nd time map will ne abnormal
       setTimeout(function(){_setupMap();}, 200);
-      _setupEditForm();
+      _setupEditForm(cal);
     });
   }
 
-
+  // hover in, init tip and show it
   function hoverExpense(event, jsEvent, view){
     var _tip = $(this).data('tip');
     if (_tip){
+      _tip.setContent(event.address); // in case address edited
       _tip.show();
       return;
     }
 
-    var _address = event.address;
-    var _tip = new Opentip($(this));
+    var _tip = new Opentip(
+      $(this),
+      event.address,
+      {target:true, tipJoint: 'bottom center', style:'dark'}
+    );
     _tip.show();
-    _tip.setContent(_address);
 
     $(this).data('tip', _tip);
   }
 
+  // hover out, hide tip
   function hoverOutExpense(event, jsEvent, view){
     var _tip = $(this).data('tip');
     if (_tip){
@@ -75,12 +79,35 @@ define(['jquery', 'lib/opentip-jquery.min', 'lib/bootstrap/bootbox.min', 'lib/fu
     });
   }
 
-  function _setupEditForm(){
+  function _setupEditForm(expense){
     $('#expenseEditForm').submit(function(e){
       e.preventDefault();
+
+      // update expense display and hover tips
+      var _formArray = $(this).serializeArray();
+      expense.title = '';
+      for (var i=0;i<_formArray.length;i++){
+        var key = _formArray[i].name;
+        var val = _formArray[i].value;
+
+        switch(key){
+          case 'amount':
+            expense.title = expense.title + ' ' + val;
+            break;
+          case 'address':
+            expense.address = val;
+            break;
+          case 'type':
+            expense.title = _(val) + expense.title;
+          default :
+            break;
+        }
+      }
+      $('.calendar').fullCalendar('updateEvent', expense);
+
+      // update expense in server
       var _data = $(this).serialize();
       var _url = $(this).attr('action') + '?ajax=1';
-
       $.ajax({
         dataType: 'json',
         url: _url,
