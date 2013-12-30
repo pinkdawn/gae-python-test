@@ -4,9 +4,6 @@ require.config({
       'bootstrap': '//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min'
     },
     shim:{
-      'lib/bootstrap/datepicker': {
-        deps: ['jquery']
-      },
       'lib/fullcalendar.min': {
         deps: ['jquery']
       },

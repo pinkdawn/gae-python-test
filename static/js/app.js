@@ -1,11 +1,4 @@
-define(['jquery', 'bootstrap', 'lib/bootstrap/datepicker', 'ajax'], function($, bootstrap, datepicker, ajax) {
-
-  function _setupDatePicker(){
-    $('.datepicker').datepicker({
-      format: 'yyyy-mm-dd',
-      viewMode: 'months'
-    });
-  }
+define(['jquery', 'ajax', 'bootstrap'], function($, ajax) {
 
   function _setupToggle(){
     $(document).on('click', '[data-toggle]', [], function(){
@@ -15,7 +8,6 @@ define(['jquery', 'bootstrap', 'lib/bootstrap/datepicker', 'ajax'], function($, 
   }
 
   function _init(){
-    _setupDatePicker();
     _setupToggle();
     ajax.initialize();
   }
